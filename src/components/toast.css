@@ -1,0 +1,233 @@
+.ToastBarBase {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  color: #363636;
+  line-height: 1.3;
+  will-change: transform;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
+  max-width: 350px;
+  pointer-events: auto;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.Message {
+  display: flex;
+  justify-content: center;
+  margin: 4px 10px;
+  color: inherit;
+  flex: 1 1 auto;
+  white-space: pre-line;
+}
+
+.Active {
+  z-index: 9999;
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.StatusWrapper {
+  position: absolute;
+}
+
+.IndicatorWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.AnimatedIconWrapper {
+  position: relative;
+  transform: scale(0.6);
+  opacity: 0.4;
+  min-width: 20px;
+  animation: enter 0.3s 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.ErrorIcon {
+  width: 20px;
+  opacity: 0;
+  height: 20px;
+  border-radius: 10px;
+  background: #ff4b4b; /* Default primary color */
+  position: relative;
+  transform: rotate(45deg);
+
+  animation: circleAnimation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+  animation-delay: 100ms;
+}
+
+.ErrorIcon:after,
+.ErrorIcon:before {
+  content: '';
+  animation: firstLineAnimation 0.15s ease-out forwards;
+  animation-delay: 150ms;
+  position: absolute;
+  border-radius: 3px;
+  opacity: 0;
+  background: #fff; /* Default secondary color */
+  bottom: 9px;
+  left: 4px;
+  height: 2px;
+  width: 12px;
+}
+
+.ErrorIcon:before {
+  animation: secondLineAnimation 0.15s ease-out forwards;
+  animation-delay: 180ms;
+  transform: rotate(90deg);
+}
+
+.CheckmarkIcon {
+  width: 20px;
+  opacity: 0;
+  height: 20px;
+  border-radius: 10px;
+  background: #61d345; /* Default primary color */
+  position: relative;
+  transform: rotate(45deg);
+
+  animation: circleAnimation 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+  animation-delay: 100ms;
+}
+
+.CheckmarkIcon:after {
+  content: '';
+  box-sizing: border-box;
+  animation: checkmarkAnimation 0.2s ease-out forwards;
+  opacity: 0;
+  animation-delay: 200ms;
+  position: absolute;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+  border-color: #fff; /* Default secondary color */
+  bottom: 6px;
+  left: 6px;
+  height: 10px;
+  width: 6px;
+}
+
+.LoaderIcon {
+  --primary-color: #616161;
+  --secondary-color: #e0e0e0;
+
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border: 2px solid;
+  border-radius: 100%;
+  border-color: var(--secondary-color);
+  border-right-color: var(--primary-color);
+  animation: rotate 1s linear infinite;
+}
+
+/*Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes enter {
+  from {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes circleAnimation {
+  from {
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+@keyframes firstLineAnimation {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes secondLineAnimation {
+  from {
+    transform: scale(0) rotate(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(90deg);
+    opacity: 1;
+  }
+}
+
+@keyframes checkmarkAnimation {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+  40% {
+    height: 0;
+    width: 6px;
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    height: 10px;
+  }
+}
+
+@keyframes circleAnimation {
+  from {
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+/***/
+/* prettier-ignore */
+@keyframes enterTop {
+  0% {transform: translate3d(0,-200%,0) scale(.6); opacity:.5;}
+  100% {transform: translate3d(0,0,0) scale(1); opacity:1;}
+}
+/* prettier-ignore */
+@keyframes enterBottom {
+  0% {transform: translate3d(0,200%,0) scale(.6); opacity:.5;}
+  100% {transform: translate3d(0,0,0) scale(1); opacity:1;}
+}
+/* prettier-ignore */
+@keyframes exitTop {
+  0% {transform: translate3d(0,0,-1px) scale(1); opacity:1;}
+  100% {transform: translate3d(0,-150%,-1px) scale(.6); opacity:0;}
+}
+/* prettier-ignore */
+@keyframes exitBottom {
+  0% {transform: translate3d(0,0,-1px) scale(1); opacity:1;}
+  100% {transform: translate3d(0,150%,-1px) scale(.6); opacity:0;}
+}

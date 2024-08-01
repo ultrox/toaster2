@@ -10,15 +10,16 @@ import {
 import toast, { useToaster } from './core/headless';
 
 const notify = () => toast('Here is your toast.');
-const error = () => toast.success('Error Danger');
-toast('Hello Darkness!', {
-  icon: '👏',
-  style: {
-    borderRadius: '10px',
-    background: '#333',
-    color: '#fff',
-  },
-});
+const promise = () => {
+  toast.promise(
+    new Promise(r => setTimeout(r, 5000)),
+     {
+       loading: 'Fetching...',
+       success: <b>Got it saved!</b>,
+       error: <b>We faild.</b>,
+     }
+   );
+}
 
 const client = new QueryClient({
   queryCache: new QueryCache({
@@ -36,7 +37,9 @@ const App = () => {
   });
   return (
     <div>
-      <button onClick={notify}>Make me a toast</button>
+      <button onClick={() => {
+              promise()
+      }}>Boom</button>
       <Toaster />
     </div>
   );

@@ -1,3 +1,4 @@
 - Fix missing gap icons
 - add variants with data-attr
 - write tests
+- fix type problem with Error and rest of components

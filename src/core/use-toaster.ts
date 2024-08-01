@@ -4,24 +4,6 @@ import { toast } from './toast';
 import { DefaultToastOptions, Toast, ToastPosition } from './types';
 import { useInterval } from './utils';
 
-const updateHeight = (toastId: string, height: number) => {
-  dispatch({
-    type: ActionType.UPDATE_TOAST,
-    toast: { id: toastId, height },
-  });
-};
-
-export const endPause = () => {
-  dispatch({ type: ActionType.END_PAUSE, time: Date.now() });
-};
-
-export const startPause = () => {
-  dispatch({
-    type: ActionType.START_PAUSE,
-    time: Date.now(),
-  });
-};
-
 export const useToaster = (toastOptions?: DefaultToastOptions) => {
   const { toasts, pausedAt } = useStore(toastOptions);
 
@@ -88,4 +70,23 @@ export const useToaster = (toastOptions?: DefaultToastOptions) => {
       calculateOffset,
     },
   };
+};
+
+
+const updateHeight = (toastId: string, height: number) => {
+  dispatch({
+    type: ActionType.UPDATE_TOAST,
+    toast: { id: toastId, height },
+  });
+};
+
+export const endPause = () => {
+  dispatch({ type: ActionType.END_PAUSE, time: Date.now() });
+};
+
+export const startPause = () => {
+  dispatch({
+    type: ActionType.START_PAUSE,
+    time: Date.now(),
+  });
 };

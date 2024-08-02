@@ -39,6 +39,9 @@
   "overrides": {
     "eslint": "$eslint"
   },
+  "files": [
+    "dist"
+  ],
   "stackblitz": {
     "startCommand": "npm run test"
   }

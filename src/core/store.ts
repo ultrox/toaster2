@@ -105,9 +105,7 @@ export const reducer = (state: State, action: Action): State => {
       }
       return {
         ...state,
-        toasts: toasts
-        .filter((t) => t.id !== action.toastId)
-
+        toasts: toasts.filter((t) => t.id !== action.toastId)
       };
     }
     case ActionType.START_PAUSE: {
@@ -127,7 +125,6 @@ export const reducer = (state: State, action: Action): State => {
 };
 
 function compensateForPausedTime(toasts: Toast[], pausedAt: number ) {
-  debugger;
   return toasts.map(t => {
     const newToast = {
       ...t,

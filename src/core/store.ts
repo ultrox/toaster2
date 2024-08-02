@@ -93,12 +93,19 @@ export const reducer = (state: State, action: Action): State => {
       };
     }
     case ActionType.REMOVE_TOAST: {
+      const isPaused = state.pausedAt !== undefined
+      let toasts = state.toasts;
+      if (isPaused) {
+          toasts = compensateForPausedTime(state.toasts, state.pausedAt ?? 0)
+      }
+
+      
       if (action.toastId === undefined) {
         return { ...state, toasts: [] };
       }
       return {
         ...state,
-        toasts: state.toasts.filter((t) => t.id !== action.toastId),
+        toasts: toasts.filter((t) => t.id !== action.toastId)
       };
     }
     case ActionType.START_PAUSE: {
@@ -108,18 +115,26 @@ export const reducer = (state: State, action: Action): State => {
       };
     }
     case ActionType.END_PAUSE: {
-      const diff = action.time - (state.pausedAt || 0);
       return {
         ...state,
         pausedAt: undefined,
-        toasts: state.toasts.map((t) => ({
-          ...t,
-          pauseDuration: t.pauseDuration + diff,
-        })),
+        toasts: compensateForPausedTime(state.toasts, state.pausedAt ?? 0),
       };
     }
   }
 };
+
+function compensateForPausedTime(toasts: Toast[], pausedAt: number ) {
+  return toasts.map(t => {
+    const newToast = {
+      ...t,
+      // adding old pauseDuration allows for multiple pause-resume cycles
+      pauseDuration: Date.now() - pausedAt + t.pauseDuration
+    }
+    return newToast
+  })
+}
+
 
 export const dispatch = (action: Action) => {
   memoryState = reducer(memoryState, action);

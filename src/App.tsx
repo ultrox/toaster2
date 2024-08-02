@@ -30,7 +30,16 @@ const client = new QueryClient({
     }
   }),
 });
-
+const withDismiss = () => {
+  toast((t) => (
+    <span>
+      Custom and <b>bold</b>
+      <button onClick={() => toast.dismiss(t.id)}>
+        Dismiss2
+      </button>
+    </span>
+  ));
+}
 const App = () => {
   useQuery({
     queryKey: ['foo'],
@@ -39,9 +48,9 @@ const App = () => {
   });
   return (
     <div>
-      <button onClick={() => {
-              promise()
-      }}>Boom</button>
+      <button onClick={promise}>Boom</button>
+      <button onClick={withDismiss}>With Dismiss</button>
+      <MakeAndRemove />
       <Toaster />
     </div>
   );
@@ -52,3 +61,18 @@ export default () => (
     <App />
   </QueryClientProvider>
 );
+
+
+function MakeAndRemove() {
+ 
+  return <button onClick={ () => {
+    toast(
+    ({id}) => (
+      <div className="bg-green-500">
+        <p>Hello!</p>
+        <button onClick={() => toast.remove(id)}>Remove Me</button>
+      </div>
+    ),
+    {ttl: 3000}
+  )}}>Add And Remove</button>
+}

@@ -7,9 +7,8 @@ import {
   QueryCache,
   useQuery,
 } from '@tanstack/react-query';
-import toast, { useToaster } from './core/headless';
+import toast from './core/headless';
 
-const notify = () => toast('Here is your toast.');
 const promise = () => {
   toast.promise(
     new Promise(r => setTimeout(r, 5000)),
@@ -23,17 +22,20 @@ const promise = () => {
 
 const client = new QueryClient({
   queryCache: new QueryCache({
-    onError: () => {
-      error('KOKO');
+    onError: (err) => {
+      toast.error(err.message)
     },
+    onSuccess: (_data) => {
+      toast.success("All good1")
+    }
   }),
 });
 
 const App = () => {
-  const data = useQuery({
+  useQuery({
     queryKey: ['foo'],
     retry: false,
-    queryFn: () => Promise.reject('fido'),
+    queryFn: () => Promise.reject(new Error("500: Server is using Nodejs")),
   });
   return (
     <div>
@@ -50,22 +52,3 @@ export default () => (
     <App />
   </QueryClientProvider>
 );
-
-const Notifications = () => {
-  const { toasts } = useToaster();
-
-  return (
-    <div>
-      {toasts
-        .filter((toast) => toast.visible)
-        .map((toast) => (
-          <h2 key={toast.id}>{toast.message}</h2>
-        ))}
-    </div>
-  );
-};
-
-const genId = (() => {
-  let id = 0;
-  return () => ++id;
-})();

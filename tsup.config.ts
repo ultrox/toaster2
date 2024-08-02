@@ -19,10 +19,5 @@ export default defineConfig([
     },
     entry: ['src/toaster/index.ts'],
     outDir: 'dist',
-  },
-  {
-    //...commonConfig,
-    //entry: ['src/toaster/core/headless.ts'],
-    //outDir: 'headless',
-  },
+  }
 ]);

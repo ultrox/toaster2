@@ -88,7 +88,7 @@ toast.promise = <T>(
       });
     });
 
-  return promise;
+  return {data: promise, id};
 };
 
 export { toast };

@@ -16,3 +16,6 @@ This is simplification and rewrite of react-hot-toast. Few major things I didn't
 
 ## Resources: 
 * Original Component: [react-hot-toast](https://github.com/timolins/react-hot-toast). 
+
+### Why didn't I fork?
+I didn't intend to do it at all, I played around with it on stackbliz and before I relized I fullfiled most of my goals.

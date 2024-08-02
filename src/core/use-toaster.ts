@@ -12,8 +12,9 @@ export const useToaster = (toastOptions?: DefaultToastOptions) => {
       return true;
     }
 
+    const expiresAt = toast.createdAt + (toast.ttl || 0) + toast.pauseDuration;
     return (
-      Date.now() < toast.createdAt + (toast.ttl || 0) + toast.pauseDuration
+       expiresAt >= Date.now()
     );
   }, []);
 

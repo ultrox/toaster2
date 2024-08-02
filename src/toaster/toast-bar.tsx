@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Toast, ToastPosition, resolveValue, Renderable } from '../core/types';
+import { Toast, ToastPosition, resolveValue, Renderable } from './core/types';
 import { ToastIcon } from './icons';
 
 const ToastBarBase = ({

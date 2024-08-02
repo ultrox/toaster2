@@ -6,8 +6,8 @@ import {
   ToasterProps,
   ToastPosition,
   ToastWrapperProps,
-} from '../core/types';
-import { useToaster } from '../core/use-toaster';
+} from './core/types';
+import { useToaster } from './core/use-toaster';
 import { ToastBar } from './toast-bar';
 
 const DEFAULT_OFFSET = 16;

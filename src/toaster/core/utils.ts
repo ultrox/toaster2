@@ -21,7 +21,7 @@ export function useInterval(
   options: IntervalOptions = { mode: 'running' }
 ) {
   const savedCallback = useRef(callback);
-  const intervalId = useRef<number | null>(null);
+  const intervalId = useRef<NodeJS.Timeout | null>(null);
 
   const clearActiveInterval = () => {
     if (intervalId.current !== null) {

@@ -1,13 +1,13 @@
 import './App.css';
 
-import { Toaster } from './components/toaster';
+import { Toaster } from './toaster/toaster';
 import {
   QueryClientProvider,
   QueryClient,
   QueryCache,
   useQuery,
 } from '@tanstack/react-query';
-import toast from './core/headless';
+import toast from './toaster/core/headless';
 
 const promise = () => {
   toast.promise(

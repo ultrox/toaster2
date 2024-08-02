@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { IconTheme, Toast } from '../core/types';
+import { IconTheme, Toast } from './core/types';
 
 export const ToastIcon: React.FC<{
   toast: Toast;

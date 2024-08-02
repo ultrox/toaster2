@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Toast } from '../core/types';
+import { IconTheme, Toast } from '../core/types';
 
 export const ToastIcon: React.FC<{
   toast: Toast;
@@ -34,10 +34,7 @@ export const ToastIcon: React.FC<{
   );
 };
 
-export interface ErrorTheme {
-  primary?: string;
-  secondary?: string;
-}
+export type ErrorTheme = Partial<IconTheme>;
 
 export type IconThemes = Partial<{
   success: CheckmarkTheme;
@@ -49,7 +46,7 @@ const ErrorIcon = ({
   children,
   className,
   ...rest
-}: React.ComponentProps<'div'> & IconThemes) => {
+}: React.ComponentProps<'div'> & ErrorTheme) => {
   return (
     <div {...rest} className={`ErrorIcon ${className}`}>
       {children}
@@ -57,15 +54,13 @@ const ErrorIcon = ({
   );
 };
 
-export interface CheckmarkTheme {
-  primary?: string;
-  secondary?: string;
-}
+export type CheckmarkTheme = Partial<IconTheme>;
+
 const CheckmarkIcon = ({
   children,
   className,
   ...rest
-}: React.ComponentProps<'div'> & IconThemes) => {
+}: React.ComponentProps<'div'> & CheckmarkTheme) => {
   return (
     <div {...rest} className={`CheckmarkIcon ${className}`}>
       {children}
@@ -73,16 +68,13 @@ const CheckmarkIcon = ({
   );
 };
 
-export interface LoaderTheme {
-  primary?: string;
-  secondary?: string;
-}
+export type LoaderTheme = Partial<IconTheme>;
 
 const LoaderIcon = ({
   children,
   className,
   ...rest
-}: React.ComponentProps<'div'> & IconThemes) => {
+}: React.ComponentProps<'div'> & LoaderTheme) => {
   return (
     <div {...rest} className={`LoaderIcon ${className}`}>
       {children}
